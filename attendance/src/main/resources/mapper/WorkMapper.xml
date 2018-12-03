@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wmt.attendance.dao.WorkDao">
+    <resultMap type="com.wmt.attendance.model.WorkModel" id="workId">
+        <result property="approveId" column="approve_id" />
+        <result property="commitTime" column="commit_time" />
+        <result property="empName" column="emp_name" />
+        <result property="empOrgName" column="emp_org_name" />
+        <result property="startTime" column="start_time" />
+        <result property="endTime" column="end_time" />
+        <result property="workTime" column="work_time" />
+    </resultMap>
+    
+    <insert id="workBatch" parameterType="java.util.List">
+    	insert into work(approve_id,commit_time,emp_name,emp_org_name,start_time,end_time,work_time)
+    	values
+    	<foreach collection="list" item="item" index="index" separator=",">
+    		(#{item.approveId},#{item.commitTime},#{item.empName},#{item.empOrgName},#{item.startTime},#{item.endTime},#{item.workTime})
+    	</foreach>
+    </insert>
+</mapper>
